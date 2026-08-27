@@ -17,7 +17,6 @@ from backend.app.api.application_routes import router as app_router
 from backend.app.api.automation_routes import router as auto_router
 from backend.app.api.analytics_routes import router as analytics_router
 
-# Ensure DB tables exist
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -26,7 +25,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -35,19 +33,32 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Resumes static serving
-resumes_path = Path(settings.resumes_dir)
-resumes_path.mkdir(parents=True, exist_ok=True)
-if resumes_path.exists():
+# Resumes static serving if folder exists
+try:
+    resumes_path = Path(settings.resumes_dir)
+    resumes_path.mkdir(parents=True, exist_ok=True)
     app.mount("/static/resumes", StaticFiles(directory=str(resumes_path)), name="resumes")
+except Exception:
+    pass
 
-# Include Routers
+# Mount routers for both /api and root paths for seamless Vercel / local compatibility
 app.include_router(profile_router, prefix="/api")
+app.include_router(profile_router, prefix="")
+
 app.include_router(job_router, prefix="/api")
+app.include_router(job_router, prefix="")
+
 app.include_router(resume_router, prefix="/api")
+app.include_router(resume_router, prefix="")
+
 app.include_router(app_router, prefix="/api")
+app.include_router(app_router, prefix="")
+
 app.include_router(auto_router, prefix="/api")
+app.include_router(auto_router, prefix="")
+
 app.include_router(analytics_router, prefix="/api")
+app.include_router(analytics_router, prefix="")
 
 def seed_initial_data(db):
     profile = get_or_init_master_profile(db)
@@ -114,24 +125,25 @@ def seed_initial_data(db):
             db.add(app_rec)
             db.commit()
 
-@app.on_event("startup")
-def startup_event():
-    db = SessionLocal()
-    try:
-        seed_initial_data(db)
-        print("Startup: Master profile & seed opportunities ready.")
-    finally:
-        db.close()
-
-# Also run on module load in serverless
 try:
     _db = SessionLocal()
     seed_initial_data(_db)
     _db.close()
 except Exception as _e:
-    print(f"Module seed info: {_e}")
+    print(f"Seed info: {_e}")
+
+@app.on_event("startup")
+def startup_event():
+    db = SessionLocal()
+    try:
+        seed_initial_data(db)
+    finally:
+        db.close()
 
 @app.get("/")
+@app.get("/api")
+@app.get("/health")
+@app.get("/api/health")
 def root():
     return {
         "status": "healthy",
