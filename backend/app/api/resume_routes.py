@@ -35,7 +35,7 @@ def list_role_templates():
         for k, v in TARGET_ROLE_TAXONOMY.items()
     ]
 
-@router.post("/generate")
+@router.post("/generate", response_model=ResumeResponse)
 def generate_resume(payload: ResumeGenerateRequest, db: Session = Depends(get_db)):
     profile = get_or_init_master_profile(db)
     
