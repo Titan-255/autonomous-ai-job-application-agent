@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+import traceback
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -29,6 +31,19 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    tb = traceback.format_exc()
+    print(f"Global Exception: {exc}\n{tb}")
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "Unhandled Server Exception",
+            "message": str(exc),
+            "traceback": tb
+        }
+    )
 
 # Resumes static serving if folder exists
 try:
@@ -138,7 +153,7 @@ def ensure_db_initialized():
         print(f"Lazy DB init note: {e}")
 
 @app.middleware("http")
-async def db_init_middleware(request, call_next):
+async def db_init_middleware(request: Request, call_next):
     ensure_db_initialized()
     response = await call_next(request)
     return response
