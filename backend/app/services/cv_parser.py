@@ -214,3 +214,5 @@ def get_or_init_master_profile(db: Session) -> MasterProfile:
         db.commit()
         db.refresh(profile)
     return profile
+
+load_master_cv_from_file = load_master_cv
