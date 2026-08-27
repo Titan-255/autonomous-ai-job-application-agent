@@ -1,0 +1,173 @@
+{
+  "role_category": "DATA_ANALYST",
+  "company_name": "Indeed_Applicant",
+  "resume_title": "Data Analyst Intern | Python | SQL | Pandas | NumPy | Data Analytics",
+  "personal_info": {
+    "name": "Tarun S",
+    "title": "Computer Science Student | Python | AI/ML | Data Science",
+    "phone": "+91 6380644305",
+    "email": "tarun.s19906@gmail.com",
+    "location": "Chennai, India",
+    "linkedin": "linkedin.com/in/taruns",
+    "github": "github.com/tarun-s",
+    "portfolio": ""
+  },
+  "summary": "Analytical Computer Science undergraduate with expertise in quantitative data analysis, time-series data cleaning, and predictive modeling. Proficient in Python, SQL, NumPy, Pandas, Scikit-learn, and exploratory data analysis (EDA) with practical experience developing algorithmic market evaluation engines.",
+  "education": [
+    {
+      "degree": "B.Tech in Computer Science and Engineering",
+      "year_info": "3rd Year | Expected Graduation: 2028",
+      "institution": "Amrita Vishwa Vidyapeetham",
+      "location": "Chennai, India",
+      "coursework": [
+        "Machine Learning Foundations",
+        "Data Structures & Algorithms",
+        "Database Management Systems",
+        "Object-Oriented Programming",
+        "Operating Systems"
+      ]
+    }
+  ],
+  "skills": {
+    "programming": [
+      "Python (Strong)",
+      "Java",
+      "JavaScript",
+      "C++",
+      "SQL"
+    ],
+    "ai_ml": [
+      "Machine Learning",
+      "Supervised Learning",
+      "Retrieval-Augmented Generation (RAG)",
+      "NLP",
+      "Vector Embeddings",
+      "Semantic Search",
+      "Model Evaluation"
+    ],
+    "data_science": [
+      "NumPy",
+      "Pandas",
+      "Scikit-learn (TF-IDF, Text Classification)",
+      "Data Preprocessing",
+      "Exploratory Data Analysis (EDA)"
+    ],
+    "ml_frameworks_tools": [
+      "Scikit-learn",
+      "ChromaDB",
+      "OpenAI APIs (Whisper, Embeddings)",
+      "PyTorch (Foundational)",
+      "TensorFlow (Foundational)"
+    ],
+    "web_backend": [
+      "FastAPI",
+      "Django",
+      "REST APIs",
+      "PostgreSQL",
+      "SQLite",
+      "Node.js",
+      "Angular",
+      "React"
+    ],
+    "tools_concepts": [
+      "Git",
+      "GitHub",
+      "Docker",
+      "VS Code",
+      "Object-Oriented Programming (OOP)",
+      "Agile Development"
+    ]
+  },
+  "priority_skills": [
+    "Python (Strong)",
+    "SQL",
+    "Pandas",
+    "NumPy",
+    "Scikit-learn (TF-IDF, Text Classification)",
+    "Exploratory Data Analysis (EDA)",
+    "Data Preprocessing",
+    "Model Evaluation",
+    "PostgreSQL",
+    "SQLite"
+  ],
+  "projects": [
+    {
+      "id": "hypertrade_ai",
+      "name": "HyperTrade AI \u2014 Predictive Market Analytics & Decision Engine",
+      "tech_stack": [
+        "Python",
+        "NumPy",
+        "Pandas",
+        "Technical Indicator Algorithms",
+        "REST APIs"
+      ],
+      "bullets": [
+        "Engineered a Python quantitative analytics engine computing technical indicators including RSI, 5/20-day Moving Averages (SMA), and price volatility metrics.",
+        "Applied NumPy and Pandas for data preprocessing, time-series data cleaning, and real-time market data evaluation.",
+        "Developed a multi-factor algorithmic scoring system, incorporating model training and evaluation, to deliver automated Buy/Hold/Sell recommendations with risk assessment."
+      ]
+    },
+    {
+      "id": "spectrum_ai",
+      "name": "Spectrum AI \u2014 AI-Powered RAG & Document Intelligence Platform",
+      "tech_stack": [
+        "Python",
+        "FastAPI",
+        "ChromaDB",
+        "OpenAI Whisper",
+        "RAG",
+        "Embeddings"
+      ],
+      "bullets": [
+        "Engineered a Python AI learning platform utilizing OpenAI Whisper for speech-to-text audio transcription and multi-stage text chunking workflows.",
+        "Implemented a Retrieval-Augmented Generation (RAG) pipeline using ChromaDB vector database and semantic search embeddings (text-embedding-3-small) for context-aware Q&A.",
+        "Developed automated data pipelines integrating speech transcription, vector storage, and LLM APIs to generate structured study notes, interactive quizzes, and dynamic knowledge graph visualizations."
+      ]
+    },
+    {
+      "id": "email_agent",
+      "name": "Autonomous Email Management Agent \u2014 NLP & Text Analytics Engine",
+      "tech_stack": [
+        "Python",
+        "JavaScript",
+        "n8n",
+        "Gmail API",
+        "Regex Parsing",
+        "Automation"
+      ],
+      "bullets": [
+        "Designed an automated rule & text analysis engine processing email payloads to calculate priority scores and classify message categories.",
+        "Applied natural language text analytics using keyword density scoring and regex matching to detect spam, parse attachments, and automate responses."
+      ]
+    },
+    {
+      "id": "meeting_platform",
+      "name": "AI Collaboration & Meeting Platform",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "PostgreSQL",
+        "REST APIs"
+      ],
+      "bullets": [
+        "Built backend RESTful services and relational database schemas in PostgreSQL for real-time collaboration and session management.",
+        "Optimized database query performance and API endpoints to ensure seamless data transmission and high application reliability."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "clabroom",
+      "role": "Product & Support Lead",
+      "company": "Early Stage Tech Startup (CLABROOM)",
+      "location": "Chennai, India",
+      "bullets": [
+        "Front end developer intern at Quantum AI and electronics labs.",
+        "Vocal Bridge: Worked with an early-stage AI automation and voice-agent startup, developing solutions for automated voice interactions and business process automation.",
+        "Managed technical feature iterations and customer issue resolution, bridging user feedback with backend engineering tasks.",
+        "Collaborated with cross-functional development teams in agile sprint planning to accelerate deployment cycle."
+      ]
+    }
+  ],
+  "folder": "Data_Analyst"
+}
