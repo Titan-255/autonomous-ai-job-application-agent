@@ -202,6 +202,7 @@ def get_or_init_master_profile(db: Session) -> MasterProfile:
         cv_data = load_master_cv()
         profile = MasterProfile(
             personal_info=cv_data["personal_info"],
+            professional_summary=cv_data.get("professional_summary", "Computer Science Undergraduate with expertise in Python backend architectures, NLP text analysis, Retrieval-Augmented Generation (RAG), and predictive analytics."),
             education=cv_data["education"],
             skills=cv_data["skills"],
             projects=cv_data["projects"],

@@ -13,6 +13,7 @@ class MasterProfile(Base):
     skills = Column(JSON, nullable=False)
     projects = Column(JSON, nullable=False)
     experience = Column(JSON, nullable=False)
+    preferences = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
