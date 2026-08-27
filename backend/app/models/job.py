@@ -12,7 +12,7 @@ class Job(Base):
     normalized_title = Column(String(255), nullable=False)
     company = Column(String(255), nullable=False)
     location = Column(String(255), nullable=False)
-    work_mode = Column(String(50), default='on-site') # remote, hybrid, on-site
+    work_mode = Column(String(50), default='on-site')
     job_url = Column(Text, nullable=False)
     posted_date = Column(String(100), nullable=True)
     salary = Column(String(100), nullable=True)
@@ -27,11 +27,12 @@ class Job(Base):
     preferred_skills = Column(JSON, default=list)
     education_requirements = Column(String(255), nullable=True)
     experience_requirements = Column(String(255), nullable=True)
-    application_method = Column(String(50), default='indeed_easy_apply') # indeed_easy_apply, external_url
+    application_method = Column(String(50), default='indeed_easy_apply')
     external_url = Column(Text, nullable=True)
     
     target_role_category = Column(String(100), nullable=True)
     
+    discovered_at = Column(DateTime, default=datetime.utcnow)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -40,8 +41,8 @@ class JobMatch(Base):
     id = Column(Integer, primary_key=True, index=True)
     job_id = Column(Integer, ForeignKey('jobs.id'), unique=True, nullable=False)
     
-    overall_score = Column(Integer, nullable=False) # 0 - 100
-    classification = Column(String(50), nullable=False) # EXCELLENT MATCH, STRONG MATCH, etc.
+    overall_score = Column(Integer, nullable=False)
+    classification = Column(String(50), nullable=False)
     
     role_match_score = Column(Float, default=0.0)
     tech_skill_match_score = Column(Float, default=0.0)

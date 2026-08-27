@@ -25,7 +25,7 @@ def list_jobs(
     if role_category:
         query = query.filter(Job.target_role_category == role_category)
         
-    jobs = query.order_by(Job.discovered_at.desc()).all()
+    jobs = query.order_by(Job.id.desc()).all()
     results = []
     
     for j in jobs:
@@ -51,7 +51,7 @@ def list_jobs(
             raw_description=j.raw_description,
             target_role_category=j.target_role_category,
             application_method=j.application_method,
-            discovered_at=j.discovered_at,
+            discovered_at=j.discovered_at or j.created_at,
             match_score=score,
             match_classification=jm.classification if jm else None,
             resume_generated=res_rec is not None,
@@ -84,7 +84,7 @@ def get_job_detail(job_id: int, db: Session = Depends(get_db)):
         raw_description=job.raw_description,
         target_role_category=job.target_role_category,
         application_method=job.application_method,
-        discovered_at=job.discovered_at,
+        discovered_at=job.discovered_at or job.created_at,
         match_score=jm.overall_score if jm else None,
         match_classification=jm.classification if jm else None,
         resume_generated=res_rec is not None,
