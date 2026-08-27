@@ -3,28 +3,45 @@ from pathlib import Path
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-is_serverless = bool(os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"))
 
-if is_serverless:
-    DB_URL = "sqlite:////tmp/app.db"
-    RESUMES_PATH = "/tmp/resumes"
-    Path(RESUMES_PATH).mkdir(parents=True, exist_ok=True)
-    CV_PATH = str(BASE_DIR / 'data' / 'master_cv.json')
-else:
-    DATA_DIR = BASE_DIR / 'data'
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    RESUMES_DIR = BASE_DIR / 'resumes'
-    RESUMES_DIR.mkdir(parents=True, exist_ok=True)
-    DB_URL = f"sqlite:///{DATA_DIR}/app.db"
-    RESUMES_PATH = str(RESUMES_DIR)
-    CV_PATH = str(DATA_DIR / 'master_cv.json')
+def is_env_serverless():
+    return bool(
+        os.environ.get("VERCEL")
+        or os.environ.get("VERCEL_ENV")
+        or os.environ.get("AWS_LAMBDA_FUNCTION_NAME")
+        or os.environ.get("LAMBDA_TASK_ROOT")
+        or os.environ.get("AWS_EXECUTION_ENV")
+    )
+
+def get_writable_paths():
+    if is_env_serverless():
+        tmp_resumes = Path("/tmp/resumes")
+        tmp_resumes.mkdir(parents=True, exist_ok=True)
+        return "sqlite:////tmp/app.db", str(tmp_resumes), "/tmp/browser_profile"
+        
+    try:
+        data_dir = BASE_DIR / 'data'
+        data_dir.mkdir(parents=True, exist_ok=True)
+        test_file = data_dir / '.write_test'
+        test_file.touch()
+        test_file.unlink()
+        
+        resumes_dir = BASE_DIR / 'resumes'
+        resumes_dir.mkdir(parents=True, exist_ok=True)
+        return f"sqlite:///{data_dir}/app.db", str(resumes_dir), str(data_dir / 'browser_profile')
+    except Exception:
+        tmp_resumes = Path("/tmp/resumes")
+        tmp_resumes.mkdir(parents=True, exist_ok=True)
+        return "sqlite:////tmp/app.db", str(tmp_resumes), "/tmp/browser_profile"
+
+DB_URL, RESUMES_PATH, BROWSER_PATH = get_writable_paths()
 
 class Settings(BaseSettings):
     app_name: str = 'Autonomous AI Job Application Agent'
     database_url: str = DB_URL
-    master_cv_path: str = CV_PATH
+    master_cv_path: str = str(BASE_DIR / 'data' / 'master_cv.json')
     resumes_dir: str = RESUMES_PATH
-    browser_user_data_dir: str = "/tmp/browser_profile" if is_serverless else str(BASE_DIR / 'data' / 'browser_profile')
+    browser_user_data_dir: str = BROWSER_PATH
     
     llm_provider: str = 'local_rule_based'
     openai_api_key: str = ''
@@ -39,12 +56,10 @@ class Settings(BaseSettings):
     rate_limit_delay_seconds: int = 3
     
     class Config:
-        env_file = None if is_serverless else '.env'
+        env_file = None if is_env_serverless() else '.env'
         extra = 'ignore'
 
 settings = Settings()
-
-if is_serverless:
-    settings.database_url = "sqlite:////tmp/app.db"
-    settings.resumes_dir = "/tmp/resumes"
-    settings.browser_user_data_dir = "/tmp/browser_profile"
+settings.database_url = DB_URL
+settings.resumes_dir = RESUMES_PATH
+settings.browser_user_data_dir = BROWSER_PATH
