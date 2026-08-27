@@ -11,6 +11,7 @@ class ResumeRecord(Base):
     
     file_path = Column(String(500), nullable=False)
     file_name = Column(String(255), nullable=False)
+    pdf_base64 = Column(Text, nullable=True) # Persistent binary across serverless instances
     
     resume_title = Column(String(255), nullable=False)
     summary = Column(Text, nullable=False)

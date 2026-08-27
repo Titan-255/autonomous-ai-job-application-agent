@@ -1,20 +1,46 @@
 from pydantic_settings import BaseSettings
 from pathlib import Path
 import os
+import shutil
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DATA_DIR = BASE_DIR / 'data'
-RESUMES_DIR = BASE_DIR / 'resumes'
+BUNDLE_DATA_DIR = BASE_DIR / 'data'
+BUNDLE_MASTER_CV = BUNDLE_DATA_DIR / 'master_cv.json'
+
+is_serverless = bool(os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"))
+
+if is_serverless:
+    RUNTIME_DATA_DIR = Path("/tmp/app_data")
+    RUNTIME_RESUMES_DIR = Path("/tmp/app_resumes")
+    RUNTIME_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    RUNTIME_RESUMES_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Ensure master_cv.json exists in tmp if needed
+    runtime_master_cv = RUNTIME_DATA_DIR / 'master_cv.json'
+    if not runtime_master_cv.exists() and BUNDLE_MASTER_CV.exists():
+        shutil.copy(str(BUNDLE_MASTER_CV), str(runtime_master_cv))
+        
+    DB_PATH = str(RUNTIME_DATA_DIR / 'app.db')
+    RESUMES_PATH = str(RUNTIME_RESUMES_DIR)
+    CV_PATH = str(runtime_master_cv) if runtime_master_cv.exists() else str(BUNDLE_MASTER_CV)
+else:
+    RUNTIME_DATA_DIR = BUNDLE_DATA_DIR
+    RUNTIME_RESUMES_DIR = BASE_DIR / 'resumes'
+    RUNTIME_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    RUNTIME_RESUMES_DIR.mkdir(parents=True, exist_ok=True)
+    DB_PATH = str(RUNTIME_DATA_DIR / 'app.db')
+    RESUMES_PATH = str(RUNTIME_RESUMES_DIR)
+    CV_PATH = str(BUNDLE_MASTER_CV)
 
 class Settings(BaseSettings):
     app_name: str = 'Autonomous AI Job Application Agent'
-    database_url: str = f'sqlite:///{DATA_DIR}/app.db'
-    master_cv_path: str = str(DATA_DIR / 'master_cv.json')
-    resumes_dir: str = str(RESUMES_DIR)
-    browser_user_data_dir: str = str(DATA_DIR / 'browser_profile')
+    database_url: str = f'sqlite:///{DB_PATH}'
+    master_cv_path: str = CV_PATH
+    resumes_dir: str = RESUMES_PATH
+    browser_user_data_dir: str = str(RUNTIME_DATA_DIR / 'browser_profile')
     
     # LLM Settings
-    llm_provider: str = 'local_rule_based'  # 'openai', 'gemini', 'ollama', 'local_rule_based'
+    llm_provider: str = 'local_rule_based'
     openai_api_key: str = ''
     openai_base_url: str = 'https://api.openai.com/v1'
     openai_model: str = 'gpt-4o-mini'

@@ -37,3 +37,4 @@ data/browser_profile/
 
 # Vercel
 .vercel/
+.vercel

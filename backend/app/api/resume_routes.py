@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from pathlib import Path
+import base64
 from backend.app.database import get_db
 from backend.app.models.resume import ResumeRecord
 from backend.app.models.job import Job, JobMatch
@@ -78,13 +79,13 @@ def generate_resume(payload: ResumeGenerateRequest, db: Session = Depends(get_db
         match_analysis=match_dict
     )
     
-    # Save record in DB
     resume_rec = ResumeRecord(
         job_id=payload.job_id,
         role_category=role_cat,
         company_name=company,
         file_path=pdf_result["pdf_path"],
         file_name=pdf_result["pdf_filename"],
+        pdf_base64=pdf_result.get("pdf_base64"),
         resume_title=resume_content["resume_title"],
         summary=resume_content["summary"],
         selected_skills=resume_content["skills"],
@@ -113,6 +114,21 @@ def generate_resume(payload: ResumeGenerateRequest, db: Session = Depends(get_db
 @router.get("/{resume_id}/pdf")
 def view_or_download_pdf(resume_id: int, db: Session = Depends(get_db)):
     rec = db.query(ResumeRecord).filter(ResumeRecord.id == resume_id).first()
-    if not rec or not Path(rec.file_path).exists():
-        raise HTTPException(status_code=404, detail="Resume PDF not found on disk")
-    return FileResponse(rec.file_path, media_type="application/pdf", filename=rec.file_name)
+    if not rec:
+        raise HTTPException(status_code=404, detail="Resume record not found")
+        
+    # Check if base64 stored
+    if rec.pdf_base64:
+        pdf_bytes = base64.b64decode(rec.pdf_base64)
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"inline; filename={rec.file_name}"
+            }
+        )
+        
+    if Path(rec.file_path).exists():
+        return FileResponse(rec.file_path, media_type="application/pdf", filename=rec.file_name)
+        
+    raise HTTPException(status_code=404, detail="Resume PDF content not found")

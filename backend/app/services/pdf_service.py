@@ -1,5 +1,6 @@
 import os
 import json
+import base64
 from pathlib import Path
 from typing import Dict, Any, List
 from reportlab.lib.pagesizes import letter
@@ -193,6 +194,11 @@ def generate_ats_resume_pdf(
             
     doc.build(story)
     
+    # Read binary bytes and base64 encode
+    with open(pdf_path, "rb") as pf:
+        pdf_bytes = pf.read()
+    pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
+    
     ats_extract = test_pdf_ats_extractability(str(pdf_path))
     ats_score, detected_kw, missing_kw = score_ats_compatibility(
         str(pdf_path),
@@ -232,6 +238,7 @@ def generate_ats_resume_pdf(
     return {
         "pdf_path": str(pdf_path),
         "pdf_filename": pdf_filename,
+        "pdf_base64": pdf_base64,
         "ats_score": ats_score,
         "is_single_page": ats_extract.get("is_single_page", True),
         "ats_validation_passed": ats_extract.get("is_valid", False),
