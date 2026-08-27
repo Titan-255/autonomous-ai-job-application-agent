@@ -15,10 +15,12 @@ if is_serverless:
     RUNTIME_DATA_DIR.mkdir(parents=True, exist_ok=True)
     RUNTIME_RESUMES_DIR.mkdir(parents=True, exist_ok=True)
     
-    # Ensure master_cv.json exists in tmp if needed
     runtime_master_cv = RUNTIME_DATA_DIR / 'master_cv.json'
     if not runtime_master_cv.exists() and BUNDLE_MASTER_CV.exists():
-        shutil.copy(str(BUNDLE_MASTER_CV), str(runtime_master_cv))
+        try:
+            shutil.copy(str(BUNDLE_MASTER_CV), str(runtime_master_cv))
+        except Exception:
+            pass
         
     DB_PATH = str(RUNTIME_DATA_DIR / 'app.db')
     RESUMES_PATH = str(RUNTIME_RESUMES_DIR)
@@ -39,13 +41,11 @@ class Settings(BaseSettings):
     resumes_dir: str = RESUMES_PATH
     browser_user_data_dir: str = str(RUNTIME_DATA_DIR / 'browser_profile')
     
-    # LLM Settings
     llm_provider: str = 'local_rule_based'
     openai_api_key: str = ''
     openai_base_url: str = 'https://api.openai.com/v1'
     openai_model: str = 'gpt-4o-mini'
     
-    # Automation Defaults
     demo_mode: bool = True
     default_location: str = 'Chennai, Tamil Nadu, India'
     min_match_score: int = 70
@@ -54,7 +54,14 @@ class Settings(BaseSettings):
     rate_limit_delay_seconds: int = 3
     
     class Config:
-        env_file = '.env'
+        env_file = '.env' if not is_serverless else None
         extra = 'ignore'
 
 settings = Settings()
+
+# Force serverless paths to avoid .env override
+if is_serverless:
+    settings.database_url = f'sqlite:///{DB_PATH}'
+    settings.resumes_dir = RESUMES_PATH
+    settings.master_cv_path = CV_PATH
+    settings.browser_user_data_dir = str(RUNTIME_DATA_DIR / 'browser_profile')
