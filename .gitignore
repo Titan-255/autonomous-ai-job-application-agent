@@ -38,3 +38,6 @@ data/browser_profile/
 # Vercel
 .vercel/
 .vercel
+
+# Sub-projects
+projects/
