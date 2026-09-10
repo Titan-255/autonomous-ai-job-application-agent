@@ -97,7 +97,7 @@ export const PORTFOLIO_DATA = {
     institution: "Amrita Vishwa Vidyapeetham",
     yearInfo: "3rd Year | Expected 2028",
     linkedin: "https://linkedin.com/in/taruns",
-    github: "https://github.com/tarun-s",
+    github: "https://github.com/Titan-255",
   },
 
   exploreRails: [
@@ -208,7 +208,7 @@ export const PORTFOLIO_DATA = {
         "Context Augmented LLM Prompt Synthesis -> Structured Output & Knowledge Graph"
       ],
       impact: "Eliminates 80% of manual transcription effort and delivers pinpoint semantic search across hours of technical coursework.",
-      githubUrl: "https://github.com/tarun-s",
+      githubUrl: "https://github.com/Titan-255/spectrum-ai",
       liveDemoUrl: "#spotlight",
       bannerImage: "/images/spectrum-ai-banner.webp",
       featured: true
@@ -239,7 +239,7 @@ export const PORTFOLIO_DATA = {
         "n8n Workflow Execution -> Automated Draft & Alerting"
       ],
       impact: "Reduced routine email triage time by over 70% with accurate priority classification.",
-      githubUrl: "https://github.com/tarun-s",
+      githubUrl: "https://github.com/Titan-255/autonomous-email-management-agent",
       bannerImage: "/images/email-agent-banner.webp",
       featured: false
     },
@@ -269,7 +269,7 @@ export const PORTFOLIO_DATA = {
         "REST API Distribution -> Client Visualization"
       ],
       impact: "Provides backtested algorithmic clarity with sub-second signal calculation across multi-asset tickers.",
-      githubUrl: "https://github.com/tarun-s",
+      githubUrl: "https://github.com/Titan-255/hypertrade-ai",
       bannerImage: "/images/hypertrade-banner.webp",
       featured: false
     },
@@ -299,7 +299,7 @@ export const PORTFOLIO_DATA = {
         "Real-time Session State Broadcasting"
       ],
       impact: "Delivered low query response times and stable multi-user collaborative session synchronization.",
-      githubUrl: "https://github.com/tarun-s",
+      githubUrl: "https://github.com/Titan-255/ai-collaboration-meeting-platform",
       bannerImage: "/images/meeting-platform-banner.webp",
       featured: false
     },
@@ -329,7 +329,7 @@ export const PORTFOLIO_DATA = {
         "Event Webhook -> Business Process Queue"
       ],
       impact: "Accelerated inbound call qualification speed with 24/7 automated agent availability.",
-      githubUrl: "https://github.com/tarun-s",
+      githubUrl: "https://github.com/Titan-255/vocal-bridge-voice-automation",
       bannerImage: "/images/vocal-bridge-banner.webp",
       featured: false
     },
@@ -358,7 +358,7 @@ export const PORTFOLIO_DATA = {
         "Canvas / SVG Data Visualizer -> Real-time Metric Graphs"
       ],
       impact: "Streamlined laboratory observation workflows and reduced setup diagnosis time.",
-      githubUrl: "https://github.com/tarun-s",
+      githubUrl: "https://github.com/Titan-255/quantum-ai-electronics-lab-dashboard",
       bannerImage: "/images/quantum-ai-banner.webp",
       featured: false
     }
@@ -676,9 +676,9 @@ async def process_incoming_event(event_payload: dict):
   ] as ResumeTrack[],
 
   githubActivity: {
-    profileUrl: "https://github.com/tarun-s",
-    username: "tarun-s",
-    statusText: "Building RAG pipelines & intelligent software systems",
+    profileUrl: "https://github.com/Titan-255",
+    username: "Titan-255",
+    statusText: "Building RAG pipelines, voice automation & quantitative AI systems",
     topLanguages: [
       { name: "Python", percentage: 68, color: "#3572A5" },
       { name: "TypeScript / React", percentage: 18, color: "#3178c6" },
@@ -694,7 +694,7 @@ async def process_incoming_event(event_payload: dict):
         language: "Python",
         langColor: "#3572A5",
         updated: "Recently updated",
-        url: "https://github.com/tarun-s"
+        url: "https://github.com/Titan-255/spectrum-ai"
       },
       {
         name: "hypertrade-ai",
@@ -704,27 +704,47 @@ async def process_incoming_event(event_payload: dict):
         language: "Python",
         langColor: "#3572A5",
         updated: "Active development",
-        url: "https://github.com/tarun-s"
+        url: "https://github.com/Titan-255/hypertrade-ai"
       },
       {
-        name: "autonomous-email-agent",
+        name: "autonomous-email-management-agent",
         description: "NLP & Text Analytics Engine for automated inbox triage, priority scoring, and routing.",
         stars: 15,
         forks: 3,
         language: "Python",
         langColor: "#3572A5",
         updated: "Maintained",
-        url: "https://github.com/tarun-s"
+        url: "https://github.com/Titan-255/autonomous-email-management-agent"
       },
       {
-        name: "ai-collaboration-platform",
-        description: "Distributed collaboration backend with Django REST Framework and PostgreSQL.",
+        name: "ai-collaboration-meeting-platform",
+        description: "Distributed collaboration backend with Django 5 REST Framework and PostgreSQL.",
         stars: 12,
         forks: 2,
         language: "Python",
         langColor: "#3572A5",
         updated: "Maintained",
-        url: "https://github.com/tarun-s"
+        url: "https://github.com/Titan-255/ai-collaboration-meeting-platform"
+      },
+      {
+        name: "vocal-bridge-voice-automation",
+        description: "Real-time conversational voice agent & autonomous business process state machine.",
+        stars: 16,
+        forks: 4,
+        language: "Python",
+        langColor: "#3572A5",
+        updated: "Recently updated",
+        url: "https://github.com/Titan-255/vocal-bridge-voice-automation"
+      },
+      {
+        name: "quantum-ai-electronics-lab-dashboard",
+        description: "Real-time telemetry visualization for superconducting qubits & RF microwave electronics.",
+        stars: 14,
+        forks: 3,
+        language: "Python",
+        langColor: "#3572A5",
+        updated: "Recently updated",
+        url: "https://github.com/Titan-255/quantum-ai-electronics-lab-dashboard"
       }
     ]
   }

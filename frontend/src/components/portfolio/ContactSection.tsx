@@ -125,7 +125,7 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <div className="text-[11px] font-mono text-slate-400 uppercase">Code Repositories</div>
                   <div className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                    github.com/tarun-s
+                    github.com/Titan-255
                   </div>
                 </div>
               </div>
