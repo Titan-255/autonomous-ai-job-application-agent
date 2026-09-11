@@ -82,18 +82,57 @@ export interface ResumeTrack {
   coreHighlights: string[];
 }
 
+export interface ResumeSkillCategory {
+  category: string;
+  skills: string[];
+}
+
+export interface ResumeProjectItem {
+  name: string;
+  subtitle: string;
+  tech: string[];
+  bullets: string[];
+  githubUrl: string;
+}
+
+export interface ResumeMasterData {
+  name: string;
+  title: string;
+  phone: string;
+  email: string;
+  location: string;
+  summary: string;
+  skills: ResumeSkillCategory[];
+  projects: ResumeProjectItem[];
+  education: {
+    degree: string;
+    institution: string;
+    location: string;
+    yearInfo: string;
+    coursework: string[];
+  };
+  experience: {
+    role: string;
+    organization: string;
+    location: string;
+    bullets: string[];
+  }[];
+  pdfUrl: string;
+}
+
 export const PORTFOLIO_DATA = {
   personalInfo: {
     name: "Tarun S",
     logoText: "TARUN S",
-    eyebrow: "COMPUTER SCIENCE • AI/ML • SOFTWARE",
+    title: "Computer Science Student | Python | AI/ML | Data Science",
+    eyebrow: "COMPUTER SCIENCE • PYTHON • AI/ML • DATA SCIENCE",
     heroHeadline: "TARUN S",
-    heroSubhead: "Building intelligent products at the intersection of AI, software engineering and human-centered design.",
-    heroDescription: "Computer Science undergraduate at Amrita Vishwa Vidyapeetham specializing in AI/ML applications, autonomous agents, RAG pipelines, and high-performance software systems.",
+    heroSubhead: "Computer Science Student | Python | AI/ML | Data Science",
+    heroDescription: "Computer Science undergraduate at Amrita Vishwa Vidyapeetham with strong Python programming fundamentals and hands-on experience building AI/ML applications, RAG pipelines, and data analytics engines. Eagerness to build real-world intelligent solutions as a Python AI Engineer Intern at Baigen Techno Labs.",
     email: "tarun.s19906@gmail.com",
     phone: "+91 6380644305",
     location: "Chennai, India",
-    degree: "B.Tech in Computer Science and Engineering",
+    degree: "B.Tech in Computer Science and Engineering (3rd Year | Expected Graduation: 2028)",
     institution: "Amrita Vishwa Vidyapeetham",
     yearInfo: "3rd Year | Expected 2028",
     linkedin: "https://linkedin.com/in/taruns",
@@ -620,12 +659,112 @@ async def process_incoming_event(event_payload: dict):
     ]
   },
 
+  resumeMaster: {
+    name: "TARUN S",
+    title: "Computer Science Student | Python | AI/ML | Data Science",
+    phone: "+91 6380644305",
+    email: "tarun.s19906@gmail.com",
+    location: "Chennai, India",
+    summary: "Computer Science undergraduate at Amrita Vishwa Vidyapeetham with strong Python programming fundamentals and hands-on experience building AI/ML applications, RAG pipelines, and data analytics engines. Skilled in NumPy, Pandas, Scikit-learn, vector store databases, and RESTful APIs, with a strong problem-solving mindset and eagerness to build real-world intelligent solutions as a Python AI Engineer Intern at Baigen Techno Labs.",
+    skills: [
+      {
+        category: "PROGRAMMING",
+        skills: ["Python (Strong)", "Java", "JavaScript", "C++", "SQL"]
+      },
+      {
+        category: "AI & MACHINE LEARNING",
+        skills: ["Machine Learning", "Supervised Learning", "Retrieval-Augmented Generation (RAG)", "NLP", "Vector Embeddings", "Semantic Search", "Model Evaluation"]
+      },
+      {
+        category: "DATA SCIENCE & LIBRARIES",
+        skills: ["NumPy", "Pandas", "Scikit-learn (TF-IDF, Text Classification)", "Data Preprocessing", "Exploratory Data Analysis (EDA)"]
+      },
+      {
+        category: "ML FRAMEWORKS & AI TOOLS",
+        skills: ["Scikit-learn", "ChromaDB", "OpenAI APIs (Whisper, Embeddings)", "PyTorch & TensorFlow (Foundational)"]
+      },
+      {
+        category: "WEB & BACKEND",
+        skills: ["FastAPI", "Django", "REST APIs", "PostgreSQL", "SQLite", "Node.js", "Angular", "React"]
+      },
+      {
+        category: "TOOLS & CONCEPTS",
+        skills: ["Git", "GitHub", "Docker", "VS Code", "Object-Oriented Programming (OOP)", "Agile Development"]
+      }
+    ],
+    projects: [
+      {
+        name: "Spectrum AI",
+        subtitle: "AI-Powered RAG & Document Intelligence Platform",
+        tech: ["Python", "FastAPI", "ChromaDB", "OpenAI Whisper", "RAG", "Embeddings"],
+        githubUrl: "https://github.com/Titan-255/spectrum-ai",
+        bullets: [
+          "Engineered a Python AI learning platform utilizing OpenAI Whisper for speech-to-text audio transcription and multi-stage text chunking workflows.",
+          "Implemented a Retrieval-Augmented Generation (RAG) pipeline using ChromaDB vector database and semantic search embeddings (text-embedding-3-small) for context-aware Q&A.",
+          "Developed automated data pipelines integrating speech transcription, vector storage, and LLM APIs to generate structured study notes, interactive quizzes, and dynamic knowledge graph visualizations."
+        ]
+      },
+      {
+        name: "HyperTrade AI",
+        subtitle: "Predictive Market Analytics & Decision Engine",
+        tech: ["Python", "NumPy", "Pandas", "Technical Indicator Algorithms", "REST APIs"],
+        githubUrl: "https://github.com/Titan-255/hypertrade-ai",
+        bullets: [
+          "Engineered a Python quantitative analytics engine computing technical indicators including RSI, 5/20-day Moving Averages (SMA), and price volatility metrics.",
+          "Applied NumPy and Pandas for data preprocessing, time-series data cleaning, and real-time market data evaluation.",
+          "Developed a multi-factor algorithmic scoring system, incorporating model training and evaluation, to deliver automated Buy/Hold/Sell recommendations with risk assessment."
+        ]
+      },
+      {
+        name: "Autonomous Email Management Agent",
+        subtitle: "NLP & Text Analytics Engine",
+        tech: ["Python", "JavaScript", "n8n", "Gmail API", "Regex Parsing", "Automation"],
+        githubUrl: "https://github.com/Titan-255/autonomous-email-management-agent",
+        bullets: [
+          "Designed an automated rule & text analysis engine processing email payloads to calculate priority scores and classify message categories.",
+          "Applied natural language text analytics using keyword density scoring and regex matching to detect spam, parse attachments, and automate responses."
+        ]
+      },
+      {
+        name: "AI Collaboration & Meeting Platform",
+        subtitle: "High-Concurrency Backend Services & Session Management",
+        tech: ["Python", "Django", "PostgreSQL", "REST APIs"],
+        githubUrl: "https://github.com/Titan-255/ai-collaboration-meeting-platform",
+        bullets: [
+          "Built backend RESTful services and relational database schemas in PostgreSQL for real-time collaboration and session management.",
+          "Optimized database query performance and API endpoints to ensure seamless data transmission and high application reliability."
+        ]
+      }
+    ],
+    education: {
+      degree: "B.Tech in Computer Science and Engineering",
+      yearInfo: "3rd Year | Expected Graduation: 2028",
+      institution: "Amrita Vishwa Vidyapeetham",
+      location: "Chennai, India",
+      coursework: ["Machine Learning Foundations", "Data Structures & Algorithms", "Database Management Systems", "Object-Oriented Programming", "Operating Systems"]
+    },
+    experience: [
+      {
+        role: "Product & Support Lead",
+        organization: "Early Stage Tech Startup (CLABROOM)",
+        location: "Chennai, India",
+        bullets: [
+          "Front end developer intern at Quantum AI and electronics labs.",
+          "Vocal Bridge: Worked with an early-stage AI automation and voice-agent startup, developing solutions for automated voice interactions and business process automation.",
+          "Managed technical feature iterations and customer issue resolution, bridging user feedback with backend engineering tasks.",
+          "Collaborated with cross-functional development teams in agile sprint planning to accelerate deployment cycle."
+        ]
+      }
+    ],
+    pdfUrl: "/resumes/Tarun_S_Resume.pdf"
+  } as ResumeMasterData,
+
   resumeTracks: [
     {
       id: "ai-ml",
       title: "AI / ML & Document Intelligence",
       focus: "RAG • NLP • Vector DB • Python",
-      pdfFile: "/resumes/Tarun_S_AI_ML_Intern_SampleTech.pdf",
+      pdfFile: "/resumes/Tarun_S_Resume.pdf",
       description: "Tailored for AI/ML engineering, document intelligence platforms, vector search architectures, and statistical NLP applications.",
       summary: "Computer Science undergraduate at Amrita Vishwa Vidyapeetham with strong Python fundamentals and hands-on experience building AI/ML applications, RAG pipelines, and document intelligence engines. Skilled in Supervised Learning, NLP, vector embeddings (ChromaDB), and Scikit-learn with practical speech-to-text and text analytics implementations.",
       coreHighlights: [
@@ -638,7 +777,7 @@ async def process_incoming_event(event_payload: dict):
       id: "generative-ai",
       title: "Generative AI & LLM Systems",
       focus: "LLM APIs • ChromaDB • Prompt Engineering",
-      pdfFile: "/resumes/Tarun_S_Generative_AI_Intern_SampleTech.pdf",
+      pdfFile: "/resumes/Tarun_S_Resume.pdf",
       description: "Tailored for Generative AI development, context augmentation, autonomous agents, and multi-modal audio/text pipelines.",
       summary: "Computer Science student specializing in Generative AI systems, context-aware RAG pipelines, autonomous AI agents, and semantic search architectures. Hands-on experience integrating LLM APIs, ChromaDB vector stores, OpenAI Whisper audio processing, and prompt-driven document intelligence workflows.",
       coreHighlights: [
@@ -651,7 +790,7 @@ async def process_incoming_event(event_payload: dict):
       id: "python-dev",
       title: "Python & Backend Developer",
       focus: "FastAPI • Django • PostgreSQL • REST",
-      pdfFile: "/resumes/Tarun_S_Python_Developer_Intern_SampleTech.pdf",
+      pdfFile: "/resumes/Tarun_S_Resume.pdf",
       description: "Tailored for backend engineering, high-throughput asynchronous services, relational schema design, and microservices.",
       summary: "Strong Python developer experienced with FastAPI, Django REST Framework, PostgreSQL database optimization, and asynchronous service design. Proven track record building data pipelines, API integrations, and robust backend systems.",
       coreHighlights: [
@@ -664,7 +803,7 @@ async def process_incoming_event(event_payload: dict):
       id: "product-dev",
       title: "Product & Software Developer",
       focus: "Full Stack • Agile Sprints • Feature Iteration",
-      pdfFile: "/resumes/Tarun_S_Product_Developer_Intern_SampleTech.pdf",
+      pdfFile: "/resumes/Tarun_S_Resume.pdf",
       description: "Tailored for product engineering roles requiring cross-functional collaboration, frontend/backend integration, and agile delivery.",
       summary: "Proactive engineering student with cross-functional experience spanning product engineering, backend API development, and agile feature delivery. Hands-on background translating user feedback into scalable technical specifications and building full-stack platforms.",
       coreHighlights: [
