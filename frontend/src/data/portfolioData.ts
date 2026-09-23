@@ -135,7 +135,7 @@ export const PORTFOLIO_DATA = {
     degree: "B.Tech in Computer Science and Engineering (3rd Year | Expected Graduation: 2028)",
     institution: "Amrita Vishwa Vidyapeetham",
     yearInfo: "3rd Year | Expected 2028",
-    linkedin: "https://linkedin.com/in/taruns",
+    linkedin: "https://www.linkedin.com/in/tarun-s-1435a5340/",
     github: "https://github.com/Titan-255",
   },
 

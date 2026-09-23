@@ -104,7 +104,7 @@ export const ContactSection: React.FC = () => {
                 <div>
                   <div className="text-[11px] font-mono text-slate-400 uppercase">Professional Network</div>
                   <div className="text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
-                    linkedin.com/in/taruns
+                    linkedin.com/in/tarun-s-1435a5340
                   </div>
                 </div>
               </div>

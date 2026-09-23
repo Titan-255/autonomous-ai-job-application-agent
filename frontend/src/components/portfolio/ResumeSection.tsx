@@ -5,6 +5,7 @@ import {
   Phone, Mail, MapPin, ArrowUpRight 
 } from 'lucide-react';
 import { PORTFOLIO_DATA, ResumeTrack } from '../../data/portfolioData';
+import { LinkedinIcon } from './BrandIcons';
 
 export const ResumeSection: React.FC = () => {
   const [viewMode, setViewMode] = useState<'master' | 'tracks' | 'pdf'>('master');
@@ -133,6 +134,16 @@ export const ResumeSection: React.FC = () => {
                   <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                   {resumeMaster.location}
                 </span>
+                <span className="text-slate-600">•</span>
+                <a
+                  href={PORTFOLIO_DATA.personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300 transition-colors"
+                >
+                  <LinkedinIcon className="w-3.5 h-3.5" />
+                  <span>LinkedIn</span>
+                </a>
               </div>
             </div>
 
